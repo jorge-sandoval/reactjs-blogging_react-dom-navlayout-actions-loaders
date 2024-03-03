@@ -1,6 +1,13 @@
-import { NavLink, Outlet, ScrollRestoration } from 'react-router-dom';
+import {
+  NavLink,
+  Outlet,
+  ScrollRestoration,
+  useNavigation,
+} from 'react-router-dom';
 
 export default function NavLayout() {
+  const { state } = useNavigation();
+
   return (
     <>
       <nav className="top-nav">
@@ -19,7 +26,7 @@ export default function NavLayout() {
       </nav>
       <ScrollRestoration />
       <div className="container">
-        <Outlet />
+        {state === 'loading' ? 'loading' : <Outlet />}
       </div>
     </>
   );
