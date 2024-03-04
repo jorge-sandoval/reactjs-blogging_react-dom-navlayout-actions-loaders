@@ -5,4 +5,8 @@ const getUsers = async (options: AxiosRequestConfig) => {
   return baseApi.get("users", options).then((response) => response.data);
 };
 
-export { getUsers };
+const getUser = async (userId: string = '', options: AxiosRequestConfig) => {
+  return baseApi.get(`users/${userId}`, options).then((response) => response.data);
+};
+
+export { getUsers, getUser };
