@@ -1,13 +1,9 @@
-import axios from "axios";
-import { IPost } from "../../models/post";
+
+import { IPost } from "@models/post";
+import getPosts from "../../api/posts";
 
 async function postListLoader({ request: { signal } }: { request: Request }): Promise<IPost[]> {
-  const baseUrl = import.meta.env.VITE_API_URL;
-  return axios
-    .get(`${baseUrl}/posts`, { signal })
-    .then((response) => {
-      return response.data;
-    });
+  return getPosts({ signal });
 }
 
 export default postListLoader;
