@@ -1,8 +1,9 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import NavLayout from './NavLayout';
-import postListRoute from './Pages/Posts/postListRoute';
+import postListRoute from './Pages/Posts/PostList/postListRoute';
 import userListRoute from './Pages/Users/userListRoute';
 import toDoListRoute from './Pages/ToDos/toDoListRoute';
+import postRoute from './Pages/Posts/Post/postRoute';
 
 const router = createBrowserRouter([
   {
@@ -12,10 +13,7 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="posts" /> },
       {
         path: 'posts',
-        children: [
-          postListRoute,
-          { path: ':postId', element: <h1>Individual Post</h1> },
-        ],
+        children: [postListRoute, postRoute],
       },
       {
         path: 'users',
