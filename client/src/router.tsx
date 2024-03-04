@@ -1,8 +1,8 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import NavLayout from './NavLayout';
-import ToDoList from './Pages/ToDoList';
 import postListRoute from './Pages/Posts/postListRoute';
 import userListRoute from './Pages/Users/userListRoute';
+import toDoListRoute from './Pages/ToDos/toDoListRoute';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,13 @@ const router = createBrowserRouter([
           { path: ':userId', element: <h1>Individual User</h1> },
         ],
       },
-      { path: 'todos', element: <ToDoList /> },
+      {
+        path: 'todos',
+        children: [
+          toDoListRoute,
+          { path: ':todoId', element: <h1>Individual To DO</h1> },
+        ],
+      },
       { path: '*', element: <Navigate to="posts" /> },
     ],
   },
