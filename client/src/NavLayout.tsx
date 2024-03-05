@@ -7,6 +7,7 @@ import {
 
 export default function NavLayout() {
   const { state } = useNavigation();
+  const isLoading = state === 'loading';
 
   return (
     <>
@@ -25,8 +26,9 @@ export default function NavLayout() {
         </ul>
       </nav>
       <ScrollRestoration />
-      <div className="container">
-        {state === 'loading' ? 'loading' : <Outlet />}
+      {isLoading && <div className="loading-spinner"></div>}
+      <div className={`container ${isLoading ? 'loading' : ''}`}>
+        <Outlet />
       </div>
     </>
   );
