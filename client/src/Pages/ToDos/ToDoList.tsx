@@ -7,7 +7,7 @@ export default function ToDoList() {
 
   return (
     <>
-      <h1 className="page-title">Posts</h1>
+      <h1 className="page-title">Todo List</h1>
       <ul>
         {toDoList.map((toDo) => (
           <Fragment key={toDo.id}>

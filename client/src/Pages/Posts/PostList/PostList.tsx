@@ -6,7 +6,7 @@ export default function Posts() {
   const postList = useLoaderData() as IPost[];
   return (
     <>
-      <h1 className="page-title">Posts</h1>
+      <h1 className="page-title">Posts List</h1>
       <div className="card-grid">
         {postList.map((post) => (
           <Fragment key={post.id}>

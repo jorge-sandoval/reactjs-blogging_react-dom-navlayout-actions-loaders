@@ -6,7 +6,7 @@ export default function UserList() {
   const userList = useLoaderData() as IUser[];
   return (
     <>
-      <h1 className="page-title">Posts</h1>
+      <h1 className="page-title">User List</h1>
       <div className="card-grid">
         {userList.map((user) => (
           <Fragment key={user.id}>
