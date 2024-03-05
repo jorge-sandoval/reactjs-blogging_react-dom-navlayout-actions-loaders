@@ -1,6 +1,6 @@
 import IToDo from '@models/todo';
 import { useLoaderData } from 'react-router-dom';
-import { Fragment } from 'react/jsx-runtime';
+import TodoItem from '../../components/TodoItem';
 
 export default function ToDoList() {
   const toDoList = useLoaderData() as IToDo[];
@@ -10,11 +10,7 @@ export default function ToDoList() {
       <h1 className="page-title">Todo List</h1>
       <ul>
         {toDoList.map((toDo) => (
-          <Fragment key={toDo.id}>
-            <li className={toDo.completed ? 'strike-through' : ''}>
-              {toDo.title}
-            </li>
-          </Fragment>
+          <TodoItem key={toDo.id} toDo={toDo} />
         ))}
       </ul>
     </>

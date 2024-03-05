@@ -2,6 +2,7 @@ import { IComment } from '@models/comment';
 import { IPost } from '@models/post';
 import { IUser } from '@models/user';
 import { NavLink, useLoaderData } from 'react-router-dom';
+import CommentCard from '../../../components/CommentCard';
 
 export default function Post() {
   const { post, comments, user } = useLoaderData() as {
@@ -19,12 +20,7 @@ export default function Post() {
       <h3 className="mt-4 mb-2">Comments</h3>
       <div className="card-stack">
         {comments.map((comment) => (
-          <div key={comment.id} className="card">
-            <div className="card-body">
-              <div className="text-sm mb-1">{comment.email}</div>
-              {comment.body}
-            </div>
-          </div>
+          <CommentCard key={comment.id} comment={comment} />
         ))}
       </div>
     </>

@@ -1,6 +1,6 @@
 import { IUser } from '@models/user';
-import { NavLink, useLoaderData } from 'react-router-dom';
-import { Fragment } from 'react/jsx-runtime';
+import { useLoaderData } from 'react-router-dom';
+import UserCard from '../../../components/UserCard';
 
 export default function UserList() {
   const userList = useLoaderData() as IUser[];
@@ -9,21 +9,7 @@ export default function UserList() {
       <h1 className="page-title">User List</h1>
       <div className="card-grid">
         {userList.map((user) => (
-          <Fragment key={user.id}>
-            <div className="card">
-              <div className="card-header">{user.name}</div>
-              <div className="card-body">
-                <div>{user.company.name}</div>
-                <div>{user.website}</div>
-                <div>{user.email}</div>
-              </div>
-              <div className="card-footer">
-                <NavLink className="btn" to={`${user.id}`}>
-                  View
-                </NavLink>
-              </div>
-            </div>
-          </Fragment>
+          <UserCard key={user.id} user={user} />
         ))}
       </div>
     </>

@@ -1,7 +1,9 @@
 import { IPost } from '@models/post';
 import IToDo from '@models/todo';
 import { IUser } from '@models/user';
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+import TodoItem from '../../../components/TodoItem';
+import PostCard from '../../../components/PostCard';
 
 export default function Post() {
   const { user, posts, toDos } = useLoaderData() as {
@@ -27,25 +29,13 @@ export default function Post() {
       <h3 className="mt-4 mb-2">Posts</h3>
       <div className="card-grid">
         {posts.map((post) => (
-          <div key={post.id} className="card">
-            <div className="card-header">{post.title}</div>
-            <div className="card-body">
-              <div className="card-preview-text">{post.body}</div>
-            </div>
-            <div className="card-footer">
-              <NavLink className="btn" to={`/posts/${post.id}`}>
-                View
-              </NavLink>
-            </div>
-          </div>
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
       <h3 className="mt-4 mb-2">To Dos</h3>
       <ul>
-        {toDos.map((todo) => (
-          <li key={todo.id} className={todo.completed ? 'strike-through' : ''}>
-            {todo.title}
-          </li>
+        {toDos.map((toDo) => (
+          <TodoItem key={toDo.id} toDo={toDo} />
         ))}
       </ul>
     </>
