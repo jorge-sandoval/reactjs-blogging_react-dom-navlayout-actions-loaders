@@ -10,4 +10,9 @@ const getPost = async (postId: string = '', options: AxiosRequestConfig): Promis
   return baseApi.get(`posts/${postId}`, options).then((response) => response.data);
 };
 
-export { getPosts, getPost };
+const getPostsByUserId = async (userId: string = '', options: AxiosRequestConfig): Promise<IPost[]> => {
+  return baseApi.get(`posts?userId=${userId}`, options).then((response) => response.data);
+};
+
+
+export { getPosts, getPost, getPostsByUserId };
