@@ -5,29 +5,35 @@ import userListRoute from './Pages/Users/UserList/userListRoute';
 import toDoListRoute from './Pages/ToDos/toDoListRoute';
 import postRoute from './Pages/Posts/Post/postRoute';
 import userRoute from './Pages/Users/User/userRoute';
+import ErrorPage from './Pages/Error/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <NavLayout />,
     children: [
-      { index: true, element: <Navigate to="posts" /> },
       {
-        path: 'posts',
-        children: [postListRoute, postRoute],
-      },
-      {
-        path: 'users',
-        children: [userListRoute, userRoute],
-      },
-      {
-        path: 'todos',
+        errorElement: <ErrorPage />,
         children: [
-          toDoListRoute,
-          { path: ':todoId', element: <h1>Individual To DO</h1> },
+          { index: true, element: <Navigate to="posts" /> },
+          {
+            path: 'posts',
+            children: [postListRoute, postRoute],
+          },
+          {
+            path: 'users',
+            children: [userListRoute, userRoute],
+          },
+          {
+            path: 'todos',
+            children: [
+              toDoListRoute,
+              { path: ':todoId', element: <h1>Individual To DO</h1> },
+            ],
+          },
+          { path: '*', element: <Navigate to="posts" /> },
         ],
       },
-      { path: '*', element: <Navigate to="posts" /> },
     ],
   },
 ]);
