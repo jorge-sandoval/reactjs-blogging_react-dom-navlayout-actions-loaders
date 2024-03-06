@@ -7,7 +7,7 @@ import {
 
 export default function NavLayout() {
   const { state } = useNavigation();
-  const isLoading = state === 'loading';
+  const isProcessing = state === 'loading' || state === 'submitting';
 
   return (
     <>
@@ -26,8 +26,8 @@ export default function NavLayout() {
         </ul>
       </nav>
       <ScrollRestoration />
-      {isLoading && <div className="loading-spinner"></div>}
-      <div className={`container ${isLoading ? 'loading' : ''}`}>
+      {isProcessing && <div className="loading-spinner"></div>}
+      <div className={`container ${isProcessing ? 'loading' : ''}`}>
         <Outlet />
       </div>
     </>

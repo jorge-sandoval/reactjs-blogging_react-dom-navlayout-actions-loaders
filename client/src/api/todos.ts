@@ -2,6 +2,13 @@ import { AxiosRequestConfig } from "axios";
 import baseApi from "./base";
 import IToDo from "@models/todo";
 
+const newToDo = async (toDo: Partial<IToDo>, options: AxiosRequestConfig): Promise<IToDo> => {
+  return baseApi.post("todos", toDo, {
+    headers: { 'Content-Type': 'application/json'},
+    ...options
+  }).then((response) => response.data);
+}
+
 const getToDos = async (filter: string = '', options: AxiosRequestConfig): Promise<IToDo[]> => {
   let url = "todos";
   if (filter) {
@@ -14,4 +21,4 @@ const getToDosByUserId = async (userId: string ='', options: AxiosRequestConfig)
   return baseApi.get(`todos?userId=${userId}`, options).then((response) => response.data);
 };
 
-export { getToDos, getToDosByUserId };
+export { newToDo, getToDos, getToDosByUserId };

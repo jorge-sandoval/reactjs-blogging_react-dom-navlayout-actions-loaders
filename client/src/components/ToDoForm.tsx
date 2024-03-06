@@ -1,27 +1,62 @@
 import { useEffect, useRef } from 'react';
-import { Form } from 'react-router-dom';
+import toDoFormSettings from '../models/todo-form-settings';
+import {
+  Form,
+  FormMethod,
+  NavLink,
+  useActionData,
+  useLocation,
+  useNavigation,
+} from 'react-router-dom';
 
-export default function TodoForm({
-  searchParams: { query },
+export default function ToDoForm({
+  type = 'search',
+  searchParams,
 }: {
-  searchParams: { query: string };
+  type: 'create' | 'search';
+  searchParams?: { titleQuery: string };
 }) {
-  const queryRef = useRef<HTMLInputElement>(null);
+  const { method, inputLabel, buttonLabel, backButton } =
+    toDoFormSettings[type];
+  const query = searchParams?.titleQuery || '';
+
+  const location = useLocation();
+  const error = useActionData() as { title: string };
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { state } = useNavigation();
+  const isProcessing = state === 'submitting' || state === 'loading';
 
   useEffect(() => {
-    if (queryRef.current) {
-      queryRef.current.value = query;
+    if (inputRef.current) {
+      inputRef.current.value = query;
     }
   }, [query]);
 
   return (
-    <Form className="form">
+    <Form
+      className="form"
+      method={method as FormMethod}
+      action={location.pathname}
+    >
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="query"> Search</label>
-          <input type="text" id="query" name="query" ref={queryRef} />
+          <label htmlFor="title">{inputLabel}</label>
+          <input type="text" id="title" name="title" ref={inputRef} />
         </div>
-        <button className="btn"> Search</button>
+      </div>
+      {error?.title && <div className="error">{error.title}</div>}
+      <div className="form-row form-btn-row">
+        {backButton &&
+          (isProcessing ? (
+            <span className="btn btn-outline btn-outline-disabled">Back</span>
+          ) : (
+            <NavLink to="/todos" className="btn btn-outline">
+              Back
+            </NavLink>
+          ))}
+        <button className="btn" disabled={isProcessing}>
+          {buttonLabel}
+        </button>
       </div>
     </Form>
   );

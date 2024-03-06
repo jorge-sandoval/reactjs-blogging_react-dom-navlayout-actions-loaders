@@ -257,7 +257,8 @@ body {
   justify-content: flex-end;
 }
 
-.btn:disabled {
+.btn:disabled,
+.btn-disabled {
   background: hsl(200, 10%, 50%);
   color: hsl(200, 10%, 95%);
   cursor: not-allowed;
@@ -274,7 +275,8 @@ body {
   background: hsl(200, 50%, 90%);
 }
 
-.btn-outline:disabled {
+.btn-outline:disabled,
+.btn-outline-disabled {
   border-color: hsl(200, 10%, 50%);
   color: hsl(200, 10%, 50%);
   background: hsl(200, 10%, 90%);
