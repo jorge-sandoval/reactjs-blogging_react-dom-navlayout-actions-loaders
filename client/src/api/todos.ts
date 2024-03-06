@@ -2,8 +2,12 @@ import { AxiosRequestConfig } from "axios";
 import baseApi from "./base";
 import IToDo from "@models/todo";
 
-const getToDos = async (options: AxiosRequestConfig): Promise<IToDo[]> => {
-  return baseApi.get("todos", options).then((response) => response.data);
+const getToDos = async (filter: string = '', options: AxiosRequestConfig): Promise<IToDo[]> => {
+  let url = "todos";
+  if (filter) {
+    url += `?q=${filter}`;
+  }
+  return baseApi.get(url, options).then((response) => response.data);
 };
 
 const getToDosByUserId = async (userId: string ='', options: AxiosRequestConfig): Promise<IToDo[]> => {
