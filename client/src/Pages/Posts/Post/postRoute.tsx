@@ -2,7 +2,7 @@ import Post from './Post';
 import postLoader from './postLoader';
 
 const postRoute = {
-  path: ':postId',
+  index: true,
   element: <Post />,
   loader: postLoader,
 };

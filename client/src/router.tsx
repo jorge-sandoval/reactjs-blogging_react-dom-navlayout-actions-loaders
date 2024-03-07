@@ -7,6 +7,8 @@ import postRoute from './Pages/Posts/Post/postRoute';
 import userRoute from './Pages/Users/User/userRoute';
 import ErrorPage from './Pages/Error/Error';
 import newToDoRoute from './Pages/ToDos/NewTodo/newDoRoute';
+import newPostRoute from './Pages/Posts/NewPost/newPostRoute';
+import editPostRoute from './Pages/Posts/EditPost/editPostRoute';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,14 @@ const router = createBrowserRouter([
           { index: true, element: <Navigate to="posts" /> },
           {
             path: 'posts',
-            children: [postListRoute, postRoute],
+            children: [
+              postListRoute,
+              newPostRoute,
+              {
+                path: ':postId',
+                children: [postRoute, editPostRoute],
+              },
+            ],
           },
           {
             path: 'users',
