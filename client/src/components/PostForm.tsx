@@ -63,6 +63,7 @@ export default function PostForm({ mode }: { mode: 'create' | 'edit' }) {
               id="userId"
               defaultValue={defaultValues.userId}
             >
+              <option value="">Select</option>
               {authors.map((a) => (
                 <option key={a.id} value={a.id}>
                   {a.name}

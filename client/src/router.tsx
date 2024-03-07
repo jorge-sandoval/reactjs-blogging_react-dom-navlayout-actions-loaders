@@ -22,7 +22,7 @@ const router = createBrowserRouter([
           {
             path: 'posts',
             children: [
-              postListRoute,
+              { ...postListRoute },
               newPostRoute,
               {
                 path: ':postId',

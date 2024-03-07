@@ -9,6 +9,8 @@ export default function ToDoList() {
     toDos: IToDo[];
   };
 
+  console.log('toDos', toDos);
+
   return (
     <>
       <h1 className="page-title">

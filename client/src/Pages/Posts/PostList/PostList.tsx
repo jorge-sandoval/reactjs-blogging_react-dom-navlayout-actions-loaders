@@ -1,23 +1,30 @@
 import { IPost } from '@models/post';
 import { NavLink, useLoaderData } from 'react-router-dom';
 import PostCard from '../../../components/PostCard';
+import SearchPostForm from '../../../components/SearchPostForm';
 
 export default function Posts() {
-  const postList = useLoaderData() as IPost[];
+  const { posts } = useLoaderData() as {
+    posts: IPost[];
+  };
+
   return (
     <>
-      <h1 className="page-title">
-        Posts List
-        <div className="title-btns">
-          <NavLink className="btn" to={'new'}>
-            New
-          </NavLink>
+      <div className="container">
+        <h1 className="page-title">
+          Posts List
+          <div className="title-btns">
+            <NavLink className="btn" to={'new'}>
+              New
+            </NavLink>
+          </div>
+        </h1>
+        <SearchPostForm />
+        <div className="card-grid">
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
         </div>
-      </h1>
-      <div className="card-grid">
-        {postList.map((post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
       </div>
     </>
   );
